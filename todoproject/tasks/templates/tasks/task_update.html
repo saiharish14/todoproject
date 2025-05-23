@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Task</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #f5d0c5, #f7a1c4, #fcb69f);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      color: #333;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    button {
+      background-color: #e57373;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      margin-top: 20px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #d32f2f;
+    }
+
+    .link-btn {
+      display: inline-block;
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      background-color: #777;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      width: 92%;
+    }
+
+    .link-btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Edit Task</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <label>Title:</label>
+      <input type="text" name="title" value="{{ task.title }}" required>
+
+      <label>Description:</label>
+      <textarea name="description">{{ task.description }}</textarea>
+
+      <label>
+        <input type="checkbox" name="completed" {% if task.completed %}checked{% endif %}>
+        Completed
+      </label>
+
+      <button type="submit">Update</button>
+    </form>
+    <a href="{% url 'tasks:task_list' %}" class="link-btn">Back to list</a>
+  </div>
+
+</body>
+</html>
